@@ -1,0 +1,91 @@
+﻿<Window x:Class="QRCodeScanner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QRCodeScanner"
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" 
+        mc:Ignorable="d" ResizeMode="NoResize"
+        Title="发票扫码工具" Height="700" Width="1050">
+    <Window.Resources>
+        <!--<Style BasedOn="{StaticResource glyphicon}" TargetType="{x:Type Path}">
+            <Setter Property="Margin" Value="5,0"></Setter>
+        </Style>-->
+        <Style x:Key="ItemBorderStyle" TargetType="{x:Type Border}">
+            <Setter Property="Width" Value="60"></Setter>
+            <Setter Property="Height" Value="50"></Setter>
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Margin" Value="1"></Setter>
+            <Setter Property="Padding" Value="0,0"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="BorderBrush" Value="#563D7C"></Setter>
+                    <Setter Property="Background" Value="#d9edf7"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <!--<RowDefinition Height="150"/>-->
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem  x:Name="btnNew" Click="btnNew_Click">
+                <MenuItem.Template>
+                    <ControlTemplate>
+                        <Border Style="{StaticResource ItemBorderStyle}">
+                            <StackPanel>
+                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-plus}"></Path>
+                                <TextBlock TextWrapping="WrapWithOverflow" Text="新增发票"></TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </ControlTemplate>
+                </MenuItem.Template>
+            </MenuItem>
+            <MenuItem Header="导出Excel" x:Name="btnExport" Click="btnExport_Click">
+                <MenuItem.Template>
+                    <ControlTemplate>
+                        <Border Style="{StaticResource ItemBorderStyle}">
+                            <StackPanel>
+                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-download-alt}"></Path>
+                                <TextBlock TextWrapping="WrapWithOverflow" Text="导出Excel"></TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </ControlTemplate>
+                </MenuItem.Template>
+            </MenuItem>
+        </Menu>
+        <DataGrid x:Name="dataGrid" Grid.Row="1" ItemsSource="{Binding InvoiceList}" AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="NO" Binding="{Binding RowNumber}" Width="50" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="批次号" Binding="{Binding BatchCode}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="发票代码" Binding="{Binding Code}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="发票号码" Binding="{Binding Number}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="发票金额" Binding="{Binding Amount}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="开票日期" Binding="{Binding MakeDate}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
+                <!--<DataGridTextColumn Header="发票类型" Binding="{Binding TypeName}" Width="150" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>-->
+                <DataGridTextColumn Header="扫描日期" Binding="{Binding ScanDate}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="扫描时间" Binding="{Binding ScanTime}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="备注" Binding="{Binding Remark}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}"/>
+                <DataGridTemplateColumn Header="操作">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="删除" Margin="3" Height="28" FontSize="12" Style="{DynamicResource btn-danger}" Click="btnDelete_Click"/>
+                                <Button Content="修改" Margin="3" Height="28" FontSize="12" Click="btnModify_Click"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!--<GroupBox Header="新增/编辑" Grid.Row="2">
+            
+        </GroupBox>-->
+    </Grid>
+</Window>
