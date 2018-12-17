@@ -1,34 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace QRCodeScanner
 {
-    public class InvoiceModel
-    {
-        private Dictionary<string, string> typeDic = new Dictionary<string, string>() {
-            { "10","增值税电子普通发票"},
-            { "04","增值税普通发票"},
-            {"01","增值税专用发票" }
-        };
 
-        public int RowNumber { get; set; }
+    public class BaseModel : INotifyPropertyChanged
+    {
+        #region PropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// 属性改变事件
+        /// </summary>
+        /// <param name="name"></param>
+        public void RaisePropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+        #endregion
+    }
+
+    public class InvoiceModel : BaseModel
+    {
+        public int PkgIndex { get; set; }
+
+        private int rowNumber;
+        public int RowNumber
+        {
+            get { return rowNumber; }
+            set
+            {
+                rowNumber = value;
+                RaisePropertyChanged("RowNumber");
+            }
+        }
 
         public string Code { get; set; }
 
         public string Number { get; set; }
-
-        //public string TypeCode { get; set; }
-
-        //public string TypeName
-        //{
-        //    get
-        //    {
-        //        return typeDic[this.TypeCode];
-        //    }
-        //}
 
         public decimal Amount { get; set; }
 
@@ -40,8 +56,19 @@ namespace QRCodeScanner
 
         public string ScanTime { get; set; }
 
-        public string BatchCode { get; set; }
-
         public string Remark { get; set; }
+    }
+
+    public class PackageModel
+    {
+        /// <summary>
+        /// 快递单号
+        /// </summary>
+        public string PkgNumber { get; set; }
+
+        /// <summary>
+        /// 发票列表
+        /// </summary>
+        public List<InvoiceModel> InvoiceList { get; set; }
     }
 }

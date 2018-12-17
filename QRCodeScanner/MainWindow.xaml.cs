@@ -45,18 +45,18 @@ namespace QRCodeScanner
             listener.Start();
         }
 
+        private int baseNumber = 1;
+
         private ScanerHook listener = new ScanerHook();
 
-        private bool isBusy = false;
-
-        private ObservableCollection<InvoiceModel> invoiceList = new ObservableCollection<InvoiceModel>();
-        public ObservableCollection<InvoiceModel> InvoiceList
+        private ObservableCollection<PackageModel> packageList = new ObservableCollection<PackageModel>();
+        public ObservableCollection<PackageModel> PackageList
         {
-            get { return invoiceList; }
+            get { return packageList; }
             set
             {
-                invoiceList = value;
-                RaisePropertyChanged("InvoiceList");
+                packageList = value;
+                RaisePropertyChanged("PackageList");
             }
         }
 
@@ -106,38 +106,38 @@ namespace QRCodeScanner
 
         private Boolean InsertOne(InvoiceModel one)
         {
-            if (invoiceList.Count > 0)
-            {
-                var exist = InvoiceList.Where(f => f.Number == one.Number && f.Code == one.Code);
-                if (exist.Count() != 0)
-                {
-                    //listener.Stop();
-                    //isBusy = true;
-                    if (MessageBox.Show(string.Format("发票号：{0} 已存在，是否添加？", one.Code), "扫描提示", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.No)
-                    {
-                        //  listener.Start();
-                        // isBusy = false;
-                        return false;
-                    }
-                }
-            }
+            //if (invoiceList.Count > 0)
+            //{
+            //    var exist = InvoiceList.Where(f => f.Number == one.Number && f.Code == one.Code);
+            //    if (exist.Count() != 0)
+            //    {
+            //        //listener.Stop();
+            //        //isBusy = true;
+            //        if (MessageBox.Show(string.Format("发票号：{0} 已存在，是否添加？", one.Code), "扫描提示", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.No)
+            //        {
+            //            //  listener.Start();
+            //            // isBusy = false;
+            //            return false;
+            //        }
+            //    }
+            //}
 
-            one.RowNumber = invoiceList.Count > 0 ? invoiceList.Max(f => f.RowNumber) + 1 : 1;
-            invoiceList.Add(one);
+            //one.RowNumber = invoiceList.Count > 0 ? invoiceList.Max(f => f.RowNumber) + 1 : 1;
+            //invoiceList.Add(one);
             return true;
         }
 
         private Boolean UpdateOne(InvoiceModel one)
         {
-            if (invoiceList.Count > 0)
-            {
-                var exist = InvoiceList.SingleOrDefault(f => f.RowNumber == one.RowNumber);
-                if (exist != null)
-                {
-                    var index = InvoiceList.IndexOf(exist);
-                    InvoiceList[index] = one;
-                }
-            }
+            //if (invoiceList.Count > 0)
+            //{
+            //    var exist = InvoiceList.SingleOrDefault(f => f.RowNumber == one.RowNumber);
+            //    if (exist != null)
+            //    {
+            //        var index = InvoiceList.IndexOf(exist);
+            //        InvoiceList[index] = one;
+            //    }
+            //}
 
             return true;
         }
@@ -158,9 +158,9 @@ namespace QRCodeScanner
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            var model = (sender as Button).DataContext as InvoiceModel;
-            var cur = InvoiceList.SingleOrDefault(f => f.RowNumber == model.RowNumber);
-            InvoiceList.Remove(cur);
+            //var model = (sender as Button).DataContext as InvoiceModel;
+            //var cur = InvoiceList.SingleOrDefault(f => f.RowNumber == model.RowNumber);
+            //InvoiceList.Remove(cur);
         }
 
         #region PropertyChanged
@@ -181,67 +181,143 @@ namespace QRCodeScanner
 
         private void btnExport_Click(object sender, RoutedEventArgs e)
         {
-            if (invoiceList.Count == 0)
+            //if (invoiceList.Count == 0)
+            //{
+            //    MessageBox.Show("未输入任何内容！");
+            //    return;
+            //}
+
+            //SaveFileDialog fileDialog = new SaveFileDialog();
+            //fileDialog.RestoreDirectory = true;
+            //fileDialog.Filter = "Excel(2007-2013)|*.xlsx|Excel(97-2003)|*.xls";
+            //if (fileDialog.ShowDialog() != true)
+            //{
+            //    return;
+            //}
+
+
+            //IWorkbook workbook = new XSSFWorkbook();
+            //ISheet sheet = workbook.CreateSheet("sheet1");
+            //IRow rowHead = sheet.CreateRow(0);
+
+            //int index = 0;
+            //rowHead.CreateCell(index++, CellType.String).SetCellValue("NO");
+            //rowHead.CreateCell(index++, CellType.String).SetCellValue("批次号");
+            //rowHead.CreateCell(index++, CellType.String).SetCellValue("发票代码");
+            //rowHead.CreateCell(index++, CellType.String).SetCellValue("发票号码");
+            //rowHead.CreateCell(index++, CellType.String).SetCellValue("合计金额");
+            //rowHead.CreateCell(index++, CellType.String).SetCellValue("开票日期");
+            //rowHead.CreateCell(index++, CellType.String).SetCellValue("扫描日期");
+            //rowHead.CreateCell(index++, CellType.String).SetCellValue("扫描时间");
+            //rowHead.CreateCell(index++, CellType.String).SetCellValue("备注");
+
+            ////填写内容
+            //for (int i = 0; i < invoiceList.Count; i++)
+            //{
+            //    int columnIndex = 0;
+            //    IRow row = sheet.CreateRow(i + 1);
+
+            //    row.CreateCell(columnIndex++, CellType.String).SetCellValue(invoiceList[i].RowNumber);
+            //    row.CreateCell(columnIndex++, CellType.String).SetCellValue(invoiceList[i].BatchCode);
+            //    row.CreateCell(columnIndex++, CellType.String).SetCellValue(invoiceList[i].Code);
+            //    row.CreateCell(columnIndex++, CellType.String).SetCellValue(invoiceList[i].Number);
+            //    row.CreateCell(columnIndex++, CellType.String).SetCellValue(invoiceList[i].Amount.ToString());
+            //    row.CreateCell(columnIndex++, CellType.String).SetCellValue(invoiceList[i].MakeDate);
+            //    row.CreateCell(columnIndex++, CellType.String).SetCellValue(invoiceList[i].ScanDate);
+            //    row.CreateCell(columnIndex++, CellType.String).SetCellValue(invoiceList[i].ScanTime);
+            //    row.CreateCell(columnIndex++, CellType.String).SetCellValue(invoiceList[i].Remark);
+            //}
+
+            //for (int i = 0; i < invoiceList.Count; i++)
+            //{
+            //    sheet.AutoSizeColumn(i);
+            //}
+
+            //sheet.DisplayGridlines = true;
+
+            //using (FileStream stream = File.OpenWrite(fileDialog.FileName))
+            //{
+            //    workbook.Write(stream);
+            //    stream.Close();
+            //}
+            //MessageBox.Show("导出数据成功!", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //GC.Collect();
+        }
+
+        private void btnTest_Click(object sender, RoutedEventArgs e)
+        {
+            Random rand = new Random();
+
+            PackageModel pkg = new PackageModel
             {
-                MessageBox.Show("未输入任何内容！");
-                return;
-            }
+                PkgNumber = "ES000000" + rand.Next(0, 10),
+                InvoiceList = new List<InvoiceModel>()
+            };
 
-            SaveFileDialog fileDialog = new SaveFileDialog();
-            fileDialog.RestoreDirectory = true;
-            fileDialog.Filter = "Excel(2007-2013)|*.xlsx|Excel(97-2003)|*.xls";
-            if (fileDialog.ShowDialog() != true)
+            var count = rand.Next(1, 5);
+            for (int i = 0; i < count; i++)
             {
-                return;
+                var model = new InvoiceModel
+                {
+                    PkgIndex = i + 1,
+                    Code = "100010" + rand.Next(0, 9),
+                    Number = "100010" + rand.Next(0, 9),
+                    Amount = rand.Next(0, 1000),
+                    MakeDate = DateTime.Now.AddDays(-1 * rand.Next(0, 5)).ToString("yyyyMMdd"),
+                    CheckNumber = "",
+                    ScanDate = DateTime.Now.ToString("yyyy-MM-dd"),
+                    ScanTime = DateTime.Now.ToString("HH:mm"),
+                    Remark = "自动",
+                };
+                pkg.InvoiceList.Add(model);
             }
+            PackageList.Add(pkg);
 
+            UpdateRowNumber();
+        }
 
-            IWorkbook workbook = new XSSFWorkbook();
-            ISheet sheet = workbook.CreateSheet("sheet1");
-            IRow rowHead = sheet.CreateRow(0);
-
-            int index = 0;
-            rowHead.CreateCell(index++, CellType.String).SetCellValue("NO");
-            rowHead.CreateCell(index++, CellType.String).SetCellValue("批次号");
-            rowHead.CreateCell(index++, CellType.String).SetCellValue("发票代码");
-            rowHead.CreateCell(index++, CellType.String).SetCellValue("发票号码");
-            rowHead.CreateCell(index++, CellType.String).SetCellValue("合计金额");
-            rowHead.CreateCell(index++, CellType.String).SetCellValue("开票日期");
-            rowHead.CreateCell(index++, CellType.String).SetCellValue("扫描日期");
-            rowHead.CreateCell(index++, CellType.String).SetCellValue("扫描时间");
-            rowHead.CreateCell(index++, CellType.String).SetCellValue("备注");
-
-            //填写内容
-            for (int i = 0; i < invoiceList.Count; i++)
+        private void UpdateRowNumber()
+        {
+            try
             {
-                int columnIndex = 0;
-                IRow row = sheet.CreateRow(i + 1);
+                if (PackageList.Count == 0)
+                    return;
 
-                row.CreateCell(columnIndex++, CellType.String).SetCellValue(invoiceList[i].RowNumber);
-                row.CreateCell(columnIndex++, CellType.String).SetCellValue(invoiceList[i].BatchCode);
-                row.CreateCell(columnIndex++, CellType.String).SetCellValue(invoiceList[i].Code);
-                row.CreateCell(columnIndex++, CellType.String).SetCellValue(invoiceList[i].Number);
-                row.CreateCell(columnIndex++, CellType.String).SetCellValue(invoiceList[i].Amount.ToString());
-                row.CreateCell(columnIndex++, CellType.String).SetCellValue(invoiceList[i].MakeDate);
-                row.CreateCell(columnIndex++, CellType.String).SetCellValue(invoiceList[i].ScanDate);
-                row.CreateCell(columnIndex++, CellType.String).SetCellValue(invoiceList[i].ScanTime);
-                row.CreateCell(columnIndex++, CellType.String).SetCellValue(invoiceList[i].Remark);
+                var currentIndex = baseNumber;
+                for (int i = 0; i < PackageList.Count; i++)
+                {
+                    if (PackageList[i].InvoiceList.Count == 0)
+                        continue;
+
+                    for (int j = 0; j < PackageList[i].InvoiceList.Count; j++)
+                    {
+                        PackageList[i].InvoiceList[j].RowNumber = currentIndex++;
+                    }
+                }
+
+                //foreach (var item in PackageList)
+                //{
+                //    if (item.InvoiceList.Count == 0)
+                //        continue;
+
+                //    foreach (var invoice in item.InvoiceList)
+                //    {
+                //        invoice.RowNumber = currentIndex++;
+                //    }
+                //}
             }
-
-            for (int i = 0; i < invoiceList.Count; i++)
+            catch (Exception ex)
             {
-                sheet.AutoSizeColumn(i);
-            }
 
-            sheet.DisplayGridlines = true;
-
-            using (FileStream stream = File.OpenWrite(fileDialog.FileName))
-            {
-                workbook.Write(stream);
-                stream.Close();
             }
-            MessageBox.Show("导出数据成功!", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
-            GC.Collect();
+        }
+
+        private void btnSetRowNumber_Click(object sender, RoutedEventArgs e)
+        {
+            Random rand = new Random();
+
+            baseNumber = rand.Next(20, 50);
+            UpdateRowNumber();
         }
     }
 }
