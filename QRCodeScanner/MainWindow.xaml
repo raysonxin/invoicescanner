@@ -6,11 +6,8 @@
         xmlns:local="clr-namespace:QRCodeScanner"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" 
         mc:Ignorable="d" ResizeMode="NoResize"
-        Title="发票扫码工具" Height="700" Width="1050">
+        Title="发票扫码工具" Height="700" Width="1070">
     <Window.Resources>
-        <!--<Style BasedOn="{StaticResource glyphicon}" TargetType="{x:Type Path}">
-            <Setter Property="Margin" Value="5,0"></Setter>
-        </Style>-->
         <Style x:Key="ItemBorderStyle" TargetType="{x:Type Border}">
             <Setter Property="Width" Value="60"></Setter>
             <Setter Property="Height" Value="50"></Setter>
@@ -41,17 +38,17 @@
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0" Height="30"  VerticalAlignment="Top" Background="{StaticResource customBlueBrush}">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="110"/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="运单号" FontSize="14" FontFamily="Segoe Ui Dark" Foreground="White" SnapsToDevicePixels="True" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
                                 <TextBlock Text="张数" FontSize="14" FontFamily="Segoe Ui Dark" Foreground="White" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
@@ -94,7 +91,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <!--<RowDefinition Height="150"/>-->
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem  x:Name="btnNew" Click="btnNew_Click">
@@ -126,78 +122,63 @@
                     <ControlTemplate>
                         <Border Style="{StaticResource ItemBorderStyle}">
                             <StackPanel>
-                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-download-alt}"></Path>
+                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-cog}"></Path>
                                 <TextBlock TextWrapping="WrapWithOverflow" Text="设置序号"></TextBlock>
                             </StackPanel>
                         </Border>
                     </ControlTemplate>
                 </MenuItem.Template>
             </MenuItem>
-            <MenuItem Header="测试" x:Name="btnTest" Click="btnTest_Click">
+            <!--<MenuItem Header="测试" x:Name="btnTest" Click="btnTest_Click">
                 <MenuItem.Template>
                     <ControlTemplate>
                         <Border Style="{StaticResource ItemBorderStyle}">
                             <StackPanel>
                                 <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-download-alt}"></Path>
-                                <TextBlock TextWrapping="WrapWithOverflow" Text="测试"></TextBlock>
+                                <TextBlock TextWrapping="WrapWithOverflow" Text="快递单号"></TextBlock>
                             </StackPanel>
                         </Border>
                     </ControlTemplate>
                 </MenuItem.Template>
             </MenuItem>
-        </Menu>
-        <!--<DataGrid x:Name="dataGrid" Grid.Row="1" ItemsSource="{Binding InvoiceList}" AutoGenerateColumns="False" CanUserAddRows="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="运单号" CanUserSort="False" Binding="{Binding BatchCode}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="张数" CanUserSort="False" Binding="{Binding BatchCode}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="序列号" CanUserSort="False" Binding="{Binding RowNumber}" Width="50" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
-                --><!--<DataGridTextColumn Header="批次号" Binding="{Binding BatchCode}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>--><!--
-                <DataGridTextColumn Header="发票代码" CanUserSort="False" Binding="{Binding Code}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="发票号码" CanUserSort="False" Binding="{Binding Number}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="发票金额" CanUserSort="False" Binding="{Binding Amount}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="开票日期" CanUserSort="False" Binding="{Binding MakeDate}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
-                --><!--<DataGridTextColumn Header="发票类型" Binding="{Binding TypeName}" Width="150" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>--><!--
-                <DataGridTextColumn Header="扫描日期" CanUserSort="False" Binding="{Binding ScanDate}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="扫描时间" CanUserSort="False" Binding="{Binding ScanTime}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="备注" CanUserSort="False" Binding="{Binding Remark}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}"/>
-                <DataGridTemplateColumn Header="操作">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Content="删除" Margin="3" Height="28" FontSize="12" Style="{DynamicResource btn-danger}" Click="btnDelete_Click"/>
-                                <Button Content="修改" Margin="3" Height="28" FontSize="12" Click="btnModify_Click"/>
+            <MenuItem Header="测试" x:Name="btnTest1" Click="btnTest1_Click">
+                <MenuItem.Template>
+                    <ControlTemplate>
+                        <Border Style="{StaticResource ItemBorderStyle}">
+                            <StackPanel>
+                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-download-alt}"></Path>
+                                <TextBlock TextWrapping="WrapWithOverflow" Text="发票单号"></TextBlock>
                             </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>-->
-
+                        </Border>
+                    </ControlTemplate>
+                </MenuItem.Template>
+            </MenuItem>-->
+        </Menu>
         <ListBox  Grid.Row="1" VerticalAlignment="Top"  ItemsSource="{Binding PackageList}" Background="{StaticResource customBlueBrushOpacity}"  x:Name="ManufacturerListBox" ScrollViewer.VerticalScrollBarVisibility="Auto" Style="{StaticResource calcyListbox}" ItemContainerStyle="{StaticResource noStyleToListboxItem}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="110"/>
                             <ColumnDefinition Width="10*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding PkgNumber}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding PkgNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30"/>
                         <Border BorderThickness="0,0,0,1" BorderBrush="Black" ></Border>
                         <ListBox Grid.Column="1" AlternationCount="2" BorderThickness="1,0,1,1" Background="{StaticResource customBlueBrushOpacity}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding InvoiceList}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Height="30">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="120"/>
+                                            <ColumnDefinition Width="120"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="80"/>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <Border BorderThickness="0,0,1,0" BorderBrush="Black" Margin="-2" Grid.Column="0"></Border>
                                         <Border BorderThickness="0,0,1,0" BorderBrush="Black" Margin="-2" Grid.Column="1"></Border>
@@ -217,7 +198,11 @@
                                         <TextBlock Text="{Binding ScanDate}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="6"/>
                                         <TextBlock Text="{Binding ScanTime}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="7"/>
                                         <TextBlock Text="{Binding Remark}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="8"/>
-                                        <TextBlock Text="" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="9"/>
+                                        <StackPanel Orientation="Horizontal" Grid.Column="9">
+                                            <Button Content="删除" Margin="5,0" Height="28" FontSize="12" Style="{DynamicResource btn-danger}" Click="btnDelete_Click"/>
+                                            <Button Content="修改" Margin="5,0" Height="28" FontSize="12" Click="btnModify_Click"/>
+                                        </StackPanel>
+                                        <!--<TextBlock Text="" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="9"/>-->
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>

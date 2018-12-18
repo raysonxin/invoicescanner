@@ -78,6 +78,9 @@
       <DependentUpon>NewView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ScanerHook.cs" />
+    <Compile Include="SetNumberView.xaml.cs">
+      <DependentUpon>SetNumberView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
@@ -101,6 +104,10 @@
     <Page Include="PathGeometries\Glyphicons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SetNumberView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\BaseStyle.xaml">
       <Generator>MSBuild:Compile</Generator>

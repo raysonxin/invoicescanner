@@ -29,9 +29,20 @@ namespace QRCodeScanner
 
     public class InvoiceModel : BaseModel
     {
+        /// <summary>
+        /// 快递单号
+        /// </summary>
+        public string PkgNumber { get; set; }
+
+        /// <summary>
+        /// 发票在快递包裹内编号
+        /// </summary>
         public int PkgIndex { get; set; }
 
         private int rowNumber;
+        /// <summary>
+        /// 总序号
+        /// </summary>
         public int RowNumber
         {
             get { return rowNumber; }
