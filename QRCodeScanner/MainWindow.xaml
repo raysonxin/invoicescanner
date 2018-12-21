@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QRCodeScanner"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" 
-        mc:Ignorable="d" ResizeMode="NoResize"
-        Title="发票扫码工具" Height="700" Width="1070">
+        mc:Ignorable="d" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
+        Title="发票扫码工具" Height="700" MinWidth="1370">
     <Window.Resources>
         <Style x:Key="ItemBorderStyle" TargetType="{x:Type Border}">
             <Setter Property="Width" Value="60"></Setter>
@@ -49,6 +49,11 @@
                                     <ColumnDefinition Width="80"/>
                                     <ColumnDefinition Width="60"/>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="运单号" FontSize="14" FontFamily="Segoe Ui Dark" Foreground="White" SnapsToDevicePixels="True" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
                                 <TextBlock Text="张数" FontSize="14" FontFamily="Segoe Ui Dark" Foreground="White" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
@@ -60,7 +65,12 @@
                                 <TextBlock Text="扫描日期" FontSize="14" FontFamily="Segoe Ui Dark"  Foreground="White" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="7"></TextBlock>
                                 <TextBlock Text="扫描时间" FontSize="14" FontFamily="Segoe Ui Dark"  Foreground="White" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="8"></TextBlock>
                                 <TextBlock Text="备注" FontSize="14" FontFamily="Segoe Ui Dark"  Foreground="White" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="9"></TextBlock>
-                                <TextBlock Text="操作" FontSize="14" FontFamily="Segoe Ui Dark"  Foreground="White" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="10"></TextBlock>
+                                <TextBlock Text="备注1" FontSize="14" FontFamily="Segoe Ui Dark"  Foreground="White" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="10"></TextBlock>
+                                <TextBlock Text="备注2" FontSize="14" FontFamily="Segoe Ui Dark"  Foreground="White" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="11"></TextBlock>
+                                <TextBlock Text="备注3" FontSize="14" FontFamily="Segoe Ui Dark"  Foreground="White" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="12"></TextBlock>
+                                <TextBlock Text="备注4" FontSize="14" FontFamily="Segoe Ui Dark"  Foreground="White" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="13"></TextBlock>
+                                <TextBlock Text="备注5" FontSize="14" FontFamily="Segoe Ui Dark"  Foreground="White" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="14"></TextBlock>
+                                <TextBlock Text="操作" FontSize="14" FontFamily="Segoe Ui Dark"  Foreground="White" SnapsToDevicePixels="True"  HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="15"></TextBlock>
                             </Grid>
                             <Border Grid.Row="1" SnapsToDevicePixels="True"  Background="Transparent" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
                                 <ScrollViewer x:Name="ScrollViewer"  Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="0">
@@ -179,6 +189,11 @@
                                             <ColumnDefinition Width="80"/>
                                             <ColumnDefinition Width="60"/>
                                             <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <Border BorderThickness="0,0,1,0" BorderBrush="Black" Margin="-2" Grid.Column="0"></Border>
                                         <Border BorderThickness="0,0,1,0" BorderBrush="Black" Margin="-2" Grid.Column="1"></Border>
@@ -189,6 +204,11 @@
                                         <Border BorderThickness="0,0,1,0" BorderBrush="Black" Margin="-2" Grid.Column="6"></Border>
                                         <Border BorderThickness="0,0,1,0" BorderBrush="Black" Margin="-2" Grid.Column="7"></Border>
                                         <Border BorderThickness="0,0,1,0" BorderBrush="Black" Margin="-2" Grid.Column="8"></Border>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Margin="-2" Grid.Column="9"></Border>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Margin="-2" Grid.Column="10"></Border>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Margin="-2" Grid.Column="11"></Border>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Margin="-2" Grid.Column="12"></Border>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Margin="-2" Grid.Column="13"></Border>
                                         <TextBlock Text="{Binding PkgIndex}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0"/>
                                         <TextBlock Text="{Binding RowNumber}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="1"/>
                                         <TextBlock Text="{Binding Code}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="2"/>
@@ -198,7 +218,12 @@
                                         <TextBlock Text="{Binding ScanDate}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="6"/>
                                         <TextBlock Text="{Binding ScanTime}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="7"/>
                                         <TextBlock Text="{Binding Remark}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="8"/>
-                                        <StackPanel Orientation="Horizontal" Grid.Column="9">
+                                        <TextBlock Text="{Binding Remark1}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="9"/>
+                                        <TextBlock Text="{Binding Remark2}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="10"/>
+                                        <TextBlock Text="{Binding Remark3}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="11"/>
+                                        <TextBlock Text="{Binding Remark4}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="12"/>
+                                        <TextBlock Text="{Binding Remark5}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="13"/>
+                                        <StackPanel Orientation="Horizontal" Grid.Column="14">
                                             <Button Content="删除" Margin="5,0" Height="28" FontSize="12" Style="{DynamicResource btn-danger}" Click="btnDelete_Click"/>
                                             <Button Content="修改" Margin="5,0" Height="28" FontSize="12" Click="btnModify_Click"/>
                                         </StackPanel>

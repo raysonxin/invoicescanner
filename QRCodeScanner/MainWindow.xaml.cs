@@ -30,6 +30,7 @@ namespace QRCodeScanner
         {
             InitializeComponent();
             listener.ScanerEvent += Listener_ScanerEvent;
+
             this.Loaded += MainWindow_Loaded;
             this.Unloaded += MainWindow_Unloaded;
             invoiceList.CollectionChanged += InvoiceList_CollectionChanged;
@@ -290,6 +291,11 @@ namespace QRCodeScanner
                 rowHead.CreateCell(index++, CellType.String).SetCellValue("扫描日期");
                 rowHead.CreateCell(index++, CellType.String).SetCellValue("扫描时间");
                 rowHead.CreateCell(index++, CellType.String).SetCellValue("备注");
+                rowHead.CreateCell(index++, CellType.String).SetCellValue("备注1");
+                rowHead.CreateCell(index++, CellType.String).SetCellValue("备注2");
+                rowHead.CreateCell(index++, CellType.String).SetCellValue("备注3");
+                rowHead.CreateCell(index++, CellType.String).SetCellValue("备注4");
+                rowHead.CreateCell(index++, CellType.String).SetCellValue("备注5");
 
                 int startRow = 1;
                 int columnIndex = 0;
@@ -324,6 +330,11 @@ namespace QRCodeScanner
                         row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.ScanDate);
                         row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.ScanTime);
                         row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.Remark);
+                        row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.Remark1);
+                        row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.Remark2);
+                        row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.Remark3);
+                        row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.Remark4);
+                        row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.Remark5);
                     }
 
                     sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(startRow, startRow + PackageList[i].InvoiceList.Count - 1, 0, 0));
@@ -403,7 +414,6 @@ namespace QRCodeScanner
                 {
                     pkgNumber = content;
                     InsertOne(pkgNumber);
-
                     return;
                 }
 
@@ -436,6 +446,7 @@ namespace QRCodeScanner
 
         private void btnTest_Click(object sender, RoutedEventArgs e)
         {
+           // System.Windows.Forms.SendKeys
             Test(DateTime.Now.ToString("MMddHHmmss"));
         }
 

@@ -10,5 +10,6 @@
         <ResourceDictionary Source="pack://application:,,,/QRCodeScanner;component/Styles/FormControl.xaml"></ResourceDictionary>
         <ResourceDictionary Source="pack://application:,,,/QRCodeScanner;component/Styles/InputGroup.xaml"></ResourceDictionary>
         <ResourceDictionary Source="pack://application:,,,/QRCodeScanner;component/Styles/Path.xaml"></ResourceDictionary>
+        <!--<ResourceDictionary Source="pack://application:,,,/QRCodeScanner;component/Styles/DatePicker.xaml"></ResourceDictionary>-->
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

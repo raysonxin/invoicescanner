@@ -235,6 +235,7 @@ namespace QRCodeScanner
                         // 根据键盘状态和shift缓存判断输出字符  
                         _cur = ShiftChar(_key, isShift, _state).ToString();
                         _result[_result.Count - 1] += _cur;
+                        System.Diagnostics.Debug.WriteLine(string.Join("",_result));
                     }
                     // 备选
                     //判断是+ 强制添加+
