@@ -65,11 +65,11 @@ namespace QRCodeScanner
         {
             try
             {
-                if (string.IsNullOrEmpty(model.Code))
-                {
-                    MessageBox.Show("发票代码不能为空！");
-                    return;
-                }
+                //if (string.IsNullOrEmpty(model.Code))
+                //{
+                //    MessageBox.Show("发票代码不能为空！");
+                //    return;
+                //}
 
                 if (string.IsNullOrEmpty(model.Number))
                 {
@@ -83,13 +83,15 @@ namespace QRCodeScanner
                     return;
                 }
 
-                //if (string.IsNullOrEmpty(model.MakeDate))
-                //{
-                //    MessageBox.Show("开票日期不能为空！");
-                //    return;
-                //}
+                if (dpDate.SelectedDate != null)
+                {
+                    model.MakeDate = ((DateTime)dpDate.SelectedDate).ToString("yyyyMMdd");
+                }
+                else
+                {
+                    model.MakeDate = DateTime.Now.ToString("yyyyMMdd");
+                }
 
-                model.MakeDate = ((DateTime)dpDate.SelectedDate).ToString("yyyyMMdd");
                 if (callbackAction == null)
                 {
                     this.Close();

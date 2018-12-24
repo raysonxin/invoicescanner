@@ -170,7 +170,7 @@ namespace QRCodeScanner
                 var exist = invoiceList.Where(f => f.Number == one.Number);
                 if (exist.Count() != 0)
                 {
-                    if (MessageBox.Show(string.Format("发票号：{0} 已存在，是否重复添加？", one.Code), "扫描提示", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.No)
+                    if (MessageBox.Show(string.Format("发票号码：{0} 已存在，是否重复添加？", one.Number), "扫描提示", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.No)
                     {
                         return false;
                     }
