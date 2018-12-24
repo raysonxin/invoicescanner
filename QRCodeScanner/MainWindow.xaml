@@ -182,7 +182,7 @@
                     </ControlTemplate>
                 </MenuItem.Template>
             </MenuItem>
-            <MenuItem Header="测试" x:Name="btnTest" Click="btnTest_Click">
+            <!--<MenuItem Header="测试" x:Name="btnTest" Click="btnTest_Click">
                 <MenuItem.Template>
                     <ControlTemplate>
                         <Border Style="{StaticResource ItemBorderStyle}">
@@ -205,7 +205,7 @@
                         </Border>
                     </ControlTemplate>
                 </MenuItem.Template>
-            </MenuItem>
+            </MenuItem>-->
         </Menu>
         <ListBox  Grid.Row="1" VerticalAlignment="Top"  
                   ItemsSource="{Binding PackageList}" 

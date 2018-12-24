@@ -137,7 +137,7 @@ namespace QRCodeScanner
                     return InsertOne("", obj as InvoiceModel);
                 }
                 return false;
-            });
+            }, null, this.pkgNumber);
             view.ShowDialog();
         }
 
@@ -167,7 +167,7 @@ namespace QRCodeScanner
 
             if (invoiceList.Count > 0)
             {
-                var exist = invoiceList.Where(f => f.Number == one.Number && f.Code == one.Code);
+                var exist = invoiceList.Where(f => f.Number == one.Number);
                 if (exist.Count() != 0)
                 {
                     if (MessageBox.Show(string.Format("发票号：{0} 已存在，是否重复添加？", one.Code), "扫描提示", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.No)
@@ -446,7 +446,7 @@ namespace QRCodeScanner
 
         private void btnTest_Click(object sender, RoutedEventArgs e)
         {
-           // System.Windows.Forms.SendKeys
+            // System.Windows.Forms.SendKeys
             Test(DateTime.Now.ToString("MMddHHmmss"));
         }
 

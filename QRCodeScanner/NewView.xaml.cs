@@ -24,7 +24,7 @@ namespace QRCodeScanner
     /// </summary>
     public partial class NewView : Window, INotifyPropertyChanged
     {
-        public NewView(AddCallbackDelegate action, InvoiceModel one = null)
+        public NewView(AddCallbackDelegate action, InvoiceModel one = null, string pkgNo = "")
         {
             InitializeComponent();
             this.DataContext = this;
@@ -32,20 +32,25 @@ namespace QRCodeScanner
             {
                 callbackAction = action;
             }
+
+            //pkgNumber = pkgNo;
+
             if (one != null)
             {
                 this.Model = one;
-
-                //DateTimeFormatInfo dtFormat = new DateTimeFormatInfo();
-                //dtFormat.ShortDatePattern = "yyyyMMdd";
-
-                dpDate.SelectedDate = DateTime.ParseExact(model.MakeDate, "yyyyMMdd", null);//Convert.ToDateTime(model.MakeDate,dtFormat);
+                dpDate.SelectedDate = DateTime.ParseExact(model.MakeDate, "yyyyMMdd", null);
+            }
+            else
+            {
+                this.Model = new InvoiceModel { PkgNumber = pkgNo };
             }
         }
 
         private AddCallbackDelegate callbackAction { get; set; }
 
-        private InvoiceModel model = new InvoiceModel();
+        private string pkgNumber = string.Empty;
+
+        private InvoiceModel model;
         public InvoiceModel Model
         {
             get { return model; }
