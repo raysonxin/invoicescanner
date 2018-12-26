@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -222,17 +223,61 @@ namespace QRCodeScanner
 
         private void InvoiceList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (invoiceList.Count <= 0)
-                return;
-
-            var temp = invoiceList.GroupBy(f => f.PkgNumber).Select(g => new PackageModel
+            try
             {
-                PkgNumber = g.Key,
-                InvoiceList = g.ToList()
-            }).ToList();
 
-            PackageList = new ObservableCollection<PackageModel>(temp);
-            UpdateRowNumber();
+                if (invoiceList.Count <= 0)
+                    return;
+
+                var temp = invoiceList.GroupBy(f => f.PkgNumber).Select(g => new PackageModel
+                {
+                    PkgNumber = g.Key,
+                    InvoiceList = g.ToList()
+                }).ToList();
+
+                PackageList = new ObservableCollection<PackageModel>(temp);
+                UpdateRowNumber();
+
+                var scroll = GetChildObject<ScrollViewer>(ManufacturerListBox, "ScrollViewer");
+                //  scroll.ScrollToVerticalOffset(ManufacturerListBox.ActualHeight);
+                scroll.ScrollToBottom();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// 查找子元素
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public T GetChildObject<T>(DependencyObject obj, string name) where T : FrameworkElement
+        {
+            DependencyObject child = null;
+            T grandChild = null;
+
+
+            for (int i = 0; i <= VisualTreeHelper.GetChildrenCount(obj) - 1; i++)
+            {
+                child = VisualTreeHelper.GetChild(obj, i);
+
+
+                if (child is T && (((T)child).Name == name | string.IsNullOrEmpty(name)))
+                {
+                    return (T)child;
+                }
+                else
+                {
+                    grandChild = GetChildObject<T>(child, name);
+                    if (grandChild != null)
+                        return grandChild;
+                }
+            }
+            return null;
         }
 
 

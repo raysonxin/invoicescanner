@@ -144,6 +144,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem  x:Name="btnNew" Click="btnNew_Click">
