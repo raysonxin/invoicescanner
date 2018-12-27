@@ -158,8 +158,12 @@ namespace QRCodeScanner
                     PackageList.Add(new PackageModel { PkgNumber = pkgNo, InvoiceList = new List<InvoiceModel>() });
                     return true;
                 }
+                else
+                {
+                    pkgIndex = pkg.InvoiceList.Count + 1;
+                }
 
-                MessageBox.Show("快递单号：" + pkgNo + " 已经存在！", "操作提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                //  MessageBox.Show("快递单号：" + pkgNo + " 已经存在！", "操作提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return true;
             }
 
@@ -225,7 +229,6 @@ namespace QRCodeScanner
         {
             try
             {
-
                 if (invoiceList.Count <= 0)
                     return;
 
