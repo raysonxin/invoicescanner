@@ -139,6 +139,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -164,7 +165,7 @@
                     <ControlTemplate>
                         <Border Style="{StaticResource ItemBorderStyle}">
                             <StackPanel>
-                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-download-alt}"></Path>
+                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-share}"></Path>
                                 <TextBlock TextWrapping="WrapWithOverflow" Text="导出Excel"></TextBlock>
                             </StackPanel>
                         </Border>
@@ -181,6 +182,62 @@
                             </StackPanel>
                         </Border>
                     </ControlTemplate>
+                </MenuItem.Template>
+            </MenuItem>
+            <MenuItem Header="插入" x:Name="btnInsertRow" Click="btnInsertRow_Click" Tag="Before" IsEnabled="{Binding IsAllowInsert}">
+                <MenuItem.Template>
+                    <ControlTemplate>
+                        <Border Style="{StaticResource ItemBorderStyle}" x:Name="border">
+                            <StackPanel>
+                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-download-alt}"></Path>
+                                <TextBlock TextWrapping="WrapWithOverflow" Text="行前插入"></TextBlock>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="Gray"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </MenuItem.Template>
+            </MenuItem>
+            <MenuItem Header="插入" Click="btnInsertRow_Click" x:Name="InsertAfter" Tag="After" IsEnabled="{Binding IsAllowInsert}">
+                <MenuItem.Template>
+                    <ControlTemplate>
+                        <Border Style="{StaticResource ItemBorderStyle}" x:Name="border">
+                            <StackPanel>
+                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-download-alt}"></Path>
+                                <TextBlock TextWrapping="WrapWithOverflow" Text="行后插入"></TextBlock>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="Gray"/>
+                            </Trigger>
+                           
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                    
+                </MenuItem.Template>
+            </MenuItem>
+            <MenuItem Header="插入" x:Name="btnCancelInsert" Click="btnCancelInsert_Click">
+                <MenuItem.Template>
+                    <ControlTemplate>
+                        <Border Style="{StaticResource ItemBorderStyle}" x:Name="border">
+                            <StackPanel>
+                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-remove-circle}"></Path>
+                                <TextBlock TextWrapping="WrapWithOverflow" Text="取消插入"></TextBlock>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="Gray"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+
                 </MenuItem.Template>
             </MenuItem>
             <!--<MenuItem Header="测试" x:Name="btnTest" Click="btnTest_Click">
@@ -229,7 +286,7 @@
                         <ListBox Grid.Column="1" AlternationCount="2" BorderThickness="0" 
                                  Background="{StaticResource customBlueBrushOpacity}" 
                                  HorizontalContentAlignment="Stretch" 
-                                 ItemsSource="{Binding InvoiceList}">
+                                 ItemsSource="{Binding InvoiceList}" SelectionMode="Single" SelectionChanged="ListBox_SelectionChanged">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Height="30">

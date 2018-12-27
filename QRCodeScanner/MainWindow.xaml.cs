@@ -67,6 +67,8 @@ namespace QRCodeScanner
             }
         }
 
+
+
         /// <summary>
         /// 所有发票列表
         /// </summary>
@@ -134,6 +136,7 @@ namespace QRCodeScanner
                     model.Remark = "手动";
                     model.ScanDate = DateTime.Now.ToString("yyyy-MM-dd");
                     model.ScanTime = DateTime.Now.ToString("HH:mm");
+                    //model.PkgIndex = pkgIndex;
 
                     return InsertOne("", obj as InvoiceModel);
                 }
@@ -163,7 +166,6 @@ namespace QRCodeScanner
                     pkgIndex = pkg.InvoiceList.Count + 1;
                 }
 
-                //  MessageBox.Show("快递单号：" + pkgNo + " 已经存在！", "操作提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return true;
             }
 
@@ -182,7 +184,17 @@ namespace QRCodeScanner
                 }
             }
 
-            invoiceList.Add(one);
+            if (isAllowInsert)
+            {
+                //invoiceList.Where(f => f.PkgNumber == one.PkgNumber && f.PkgIndex >= one.PkgIndex).ToList();
+                invoiceList.Insert(insertIndex, one);
+
+                IsAllowInsert = false;
+            }
+            else
+            {
+                invoiceList.Add(one);
+            }
             return true;
         }
 
@@ -242,7 +254,6 @@ namespace QRCodeScanner
                 UpdateRowNumber();
 
                 var scroll = GetChildObject<ScrollViewer>(ManufacturerListBox, "ScrollViewer");
-                //  scroll.ScrollToVerticalOffset(ManufacturerListBox.ActualHeight);
                 scroll.ScrollToBottom();
             }
             catch (Exception ex)
@@ -282,7 +293,6 @@ namespace QRCodeScanner
             }
             return null;
         }
-
 
         #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -451,6 +461,7 @@ namespace QRCodeScanner
             view.ShowDialog();
         }
 
+        #region 测试部分代码
         private void Test(string codes)
         {
             try
@@ -503,6 +514,90 @@ namespace QRCodeScanner
             //01,10,011001800211,35367871,100.00,20181029,06339552573889022162,CE35,
             Random rand = new Random();
             Test(string.Format("01,10,{0},{1},100.00,20181029,06339552573889022162,CE35", rand.Next(1000000, 9000000), rand.Next(10000, 90000)));
+        }
+        #endregion
+
+        #region 行间插入数据
+
+        /// <summary>
+        /// 是否允许插入数据
+        /// </summary>
+        private bool isAllowInsert = false;
+        public bool IsAllowInsert
+        {
+            get { return isAllowInsert; }
+            set
+            {
+                isAllowInsert = value;
+                RaisePropertyChanged("IsAllowInsert");
+            }
+        }
+
+        /// <summary>
+        /// 当前选中的行
+        /// </summary>
+        private InvoiceModel currentInvoice;
+
+        private int insertIndex = 0;
+
+        /// <summary>
+        /// 插入位置
+        /// </summary>
+        private InsertPosition insertPosition = InsertPosition.Before;
+
+        enum InsertPosition
+        {
+            Before = 0,
+            After
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                currentInvoice = ((ListBox)sender).SelectedItem as InvoiceModel;
+                if (currentInvoice != null)
+                {
+                    pkgNumber = currentInvoice.PkgNumber;
+                    insertIndex = invoiceList.IndexOf(currentInvoice);
+                    IsAllowInsert = true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void btnInsertRow_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                isAllowInsert = true;
+                var menuItem = sender as MenuItem;
+
+                var tag = menuItem.Tag.ToString();
+                if (tag == "Before")
+                {
+                    insertPosition = InsertPosition.Before;
+                }
+                else
+                {
+                    insertIndex++;
+                    insertPosition = InsertPosition.After;
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        #endregion
+
+        private void btnCancelInsert_Click(object sender, RoutedEventArgs e)
+        {
+            IsAllowInsert = false;
         }
     }
 }
