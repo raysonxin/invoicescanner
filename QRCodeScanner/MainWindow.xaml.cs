@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Newtonsoft.Json;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System;
@@ -143,6 +144,68 @@ namespace QRCodeScanner
                 return false;
             }, null, this.pkgNumber);
             view.ShowDialog();
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //invoiceList
+                var json = JsonConvert.SerializeObject(invoiceList);
+                var draftFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Yonghui\\InvoiceScanner\\";
+                if (!Directory.Exists(draftFolder))
+                {
+                    Directory.CreateDirectory(draftFolder);
+                }
+                string name = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + "-手动保存.draft";
+                using (var fs = new FileStream(draftFolder + name, FileMode.OpenOrCreate))
+                {
+                    var buffer = Encoding.UTF8.GetBytes(json);
+                    fs.Write(buffer, 0, buffer.Length);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void btnOpenDraft_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var view = new SelectDraftView((o, args) =>
+                {
+
+                    if (o is DraftModel)
+                    {
+                        var model = o as DraftModel;
+                        using (var fs = new FileStream(model.FullPath, FileMode.Open))
+                        {
+                            var buffer = new byte[fs.Length];
+
+                            fs.Read(buffer, 0, buffer.Length);
+                            var json = Encoding.UTF8.GetString(buffer);
+                            var list = JsonConvert.DeserializeObject<List<InvoiceModel>>(json);
+                            if (list != null)
+                            {
+                                invoiceList.Clear();
+                                
+                                list.ForEach(f =>
+                                {
+                                    invoiceList.Add(f);
+                                });
+                            }
+                        }
+                    }
+
+                });
+                view.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         /// <summary>

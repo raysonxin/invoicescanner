@@ -89,4 +89,22 @@ namespace QRCodeScanner
         /// </summary>
         public List<InvoiceModel> InvoiceList { get; set; }
     }
+
+    public class DraftModel
+    {
+        /// <summary>
+        /// 行号
+        /// </summary>
+        public int RowNumber { get; set; }
+
+        /// <summary>
+        /// 文件名称路径
+        /// </summary>
+        public string FileName { get; set; }
+
+        /// <summary>
+        /// 完整路径
+        /// </summary>
+        public string FullPath { get; set; }
+    }
 }

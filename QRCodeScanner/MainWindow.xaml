@@ -160,6 +160,30 @@
                     </ControlTemplate>
                 </MenuItem.Template>
             </MenuItem>
+            <MenuItem  x:Name="btnSave" Click="btnSave_Click">
+                <MenuItem.Template>
+                    <ControlTemplate>
+                        <Border Style="{StaticResource ItemBorderStyle}">
+                            <StackPanel>
+                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-save}"></Path>
+                                <TextBlock TextWrapping="WrapWithOverflow" Text="保存文件"></TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </ControlTemplate>
+                </MenuItem.Template>
+            </MenuItem>
+            <MenuItem  x:Name="btnOpenDraft" Click="btnOpenDraft_Click">
+                <MenuItem.Template>
+                    <ControlTemplate>
+                        <Border Style="{StaticResource ItemBorderStyle}">
+                            <StackPanel>
+                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-open}"></Path>
+                                <TextBlock TextWrapping="WrapWithOverflow" Text="打开草稿"></TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </ControlTemplate>
+                </MenuItem.Template>
+            </MenuItem>
             <MenuItem Header="导出Excel" x:Name="btnExport" Click="btnExport_Click">
                 <MenuItem.Template>
                     <ControlTemplate>

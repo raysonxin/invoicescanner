@@ -41,6 +41,9 @@
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NPOI, Version=2.4.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <HintPath>..\packages\NPOI.2.4.0\lib\net40\NPOI.dll</HintPath>
     </Reference>
@@ -78,6 +81,9 @@
       <DependentUpon>NewView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ScanerHook.cs" />
+    <Compile Include="SelectDraftView.xaml.cs">
+      <DependentUpon>SelectDraftView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SetNumberView.xaml.cs">
       <DependentUpon>SetNumberView.xaml</DependentUpon>
     </Compile>
@@ -104,6 +110,10 @@
     <Page Include="PathGeometries\Glyphicons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SelectDraftView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SetNumberView.xaml">
       <SubType>Designer</SubType>
