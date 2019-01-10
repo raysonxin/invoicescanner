@@ -110,7 +110,7 @@ namespace QRCodeScanner
                     PkgIndex = pkgIndex++,
                     Code = items[2],
                     Number = items[3],
-                    Amount = Convert.ToDecimal(items[4]),
+                    Amount = items[4],
                     MakeDate = items[5],
                     CheckNumber = items[6],
                     ScanDate = DateTime.Now.ToString("yyyy-MM-dd"),
@@ -190,7 +190,7 @@ namespace QRCodeScanner
                             if (list != null)
                             {
                                 invoiceList.Clear();
-                                
+
                                 list.ForEach(f =>
                                 {
                                     invoiceList.Add(f);
@@ -412,11 +412,13 @@ namespace QRCodeScanner
                 rowHead.CreateCell(index++, CellType.String).SetCellValue("扫描日期");
                 rowHead.CreateCell(index++, CellType.String).SetCellValue("扫描时间");
                 rowHead.CreateCell(index++, CellType.String).SetCellValue("备注");
+                rowHead.CreateCell(index++, CellType.String).SetCellValue("张数/份");
+                rowHead.CreateCell(index++, CellType.String).SetCellValue("公司");
+                rowHead.CreateCell(index++, CellType.String).SetCellValue("Flow");
+                rowHead.CreateCell(index++, CellType.String).SetCellValue("专票");
                 rowHead.CreateCell(index++, CellType.String).SetCellValue("备注1");
+
                 rowHead.CreateCell(index++, CellType.String).SetCellValue("备注2");
-                rowHead.CreateCell(index++, CellType.String).SetCellValue("备注3");
-                rowHead.CreateCell(index++, CellType.String).SetCellValue("备注4");
-                rowHead.CreateCell(index++, CellType.String).SetCellValue("备注5");
 
                 int startRow = 1;
                 int columnIndex = 0;
@@ -451,11 +453,12 @@ namespace QRCodeScanner
                         row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.ScanDate);
                         row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.ScanTime);
                         row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.Remark);
+                        row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.PageCount);
+                        row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.Company);
+                        row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.Flow);
+                        row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.SpecialTicket);
                         row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.Remark1);
                         row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.Remark2);
-                        row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.Remark3);
-                        row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.Remark4);
-                        row.CreateCell(columnIndex++, CellType.String).SetCellValue(item.Remark5);
                     }
 
                     sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(startRow, startRow + PackageList[i].InvoiceList.Count - 1, 0, 0));
@@ -550,7 +553,7 @@ namespace QRCodeScanner
                     PkgIndex = pkgIndex++,
                     Code = items[2],
                     Number = items[3],
-                    Amount = Convert.ToDecimal(items[4]),
+                    Amount = items[4],
                     MakeDate = items[5],
                     CheckNumber = items[6],
                     ScanDate = DateTime.Now.ToString("yyyy-MM-dd"),
@@ -606,7 +609,7 @@ namespace QRCodeScanner
         /// <summary>
         /// 插入位置
         /// </summary>
-        private InsertPosition insertPosition = InsertPosition.Before;
+        private InsertPosition insertPosition = InsertPosition.After;
 
         enum InsertPosition
         {
@@ -622,7 +625,7 @@ namespace QRCodeScanner
                 if (currentInvoice != null)
                 {
                     pkgNumber = currentInvoice.PkgNumber;
-                    insertIndex = invoiceList.IndexOf(currentInvoice);
+                    insertIndex = invoiceList.IndexOf(currentInvoice) + 1;
                     IsAllowInsert = true;
                 }
             }
@@ -643,10 +646,10 @@ namespace QRCodeScanner
                 if (tag == "Before")
                 {
                     insertPosition = InsertPosition.Before;
+                    insertIndex--;
                 }
                 else
                 {
-                    insertIndex++;
                     insertPosition = InsertPosition.After;
                 }
             }
@@ -656,11 +659,10 @@ namespace QRCodeScanner
             }
         }
 
-        #endregion
-
         private void btnCancelInsert_Click(object sender, RoutedEventArgs e)
         {
             IsAllowInsert = false;
         }
+        #endregion
     }
 }

@@ -63,6 +63,7 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="150"/>
                                 </Grid.ColumnDefinitions>
                                 <Border BorderThickness="0,0,1,0" BorderBrush="White">
@@ -97,21 +98,24 @@
                                     <TextBlock Text="备注" ></TextBlock>
                                 </Border>
                                 <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="10">
-                                    <TextBlock Text="备注1" ></TextBlock>
+                                    <TextBlock Text="张数/份" ></TextBlock>
                                 </Border>
                                 <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="11">
-                                    <TextBlock Text="备注2" ></TextBlock>
+                                    <TextBlock Text="公司" ></TextBlock>
                                 </Border>
                                 <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="12">
-                                    <TextBlock Text="备注3" ></TextBlock>
+                                    <TextBlock Text="Flow" ></TextBlock>
                                 </Border>
                                 <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="13">
-                                    <TextBlock Text="备注4" ></TextBlock>
+                                    <TextBlock Text="专票" ></TextBlock>
                                 </Border>
                                 <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="14">
-                                    <TextBlock Text="备注5" ></TextBlock>
+                                    <TextBlock Text="备注1" ></TextBlock>
                                 </Border>
-                                <Border BorderThickness="0,0,0,0" BorderBrush="White" Grid.Column="15">
+                                <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="15">
+                                    <TextBlock Text="备注2" ></TextBlock>
+                                </Border>
+                                <Border BorderThickness="0,0,0,0" BorderBrush="White" Grid.Column="16">
                                     <TextBlock Text="操作" ></TextBlock>
                                 </Border>
                             </Grid>
@@ -264,7 +268,7 @@
 
                 </MenuItem.Template>
             </MenuItem>
-            <!--<MenuItem Header="测试" x:Name="btnTest" Click="btnTest_Click">
+            <MenuItem Header="测试" x:Name="btnTest" Click="btnTest_Click">
                 <MenuItem.Template>
                     <ControlTemplate>
                         <Border Style="{StaticResource ItemBorderStyle}">
@@ -287,7 +291,7 @@
                         </Border>
                     </ControlTemplate>
                 </MenuItem.Template>
-            </MenuItem>-->
+            </MenuItem>
         </Menu>
         <ListBox  Grid.Row="1" VerticalAlignment="Top"  
                   ItemsSource="{Binding PackageList}" 
@@ -329,6 +333,7 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="140"/>
                                         </Grid.ColumnDefinitions>
                                         <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="0">
@@ -359,22 +364,24 @@
                                             <TextBlock Text="{Binding Remark}" HorizontalAlignment="Center" VerticalAlignment="Center"   />
                                         </Border>
                                         <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="9">
-                                            <TextBlock Text="{Binding Remark1}" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                                            <TextBlock Text="{Binding PageCount}" HorizontalAlignment="Center" VerticalAlignment="Center"  />
                                         </Border>
                                         <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="10">
-                                            <TextBlock Text="{Binding Remark2}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            <TextBlock Text="{Binding Company}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                         </Border>
                                         <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="11">
-                                            <TextBlock Text="{Binding Remark3}" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                                            <TextBlock Text="{Binding Flow}" HorizontalAlignment="Center" VerticalAlignment="Center"  />
                                         </Border>
                                         <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="12">
-                                            <TextBlock Text="{Binding Remark4}" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                                            <TextBlock Text="{Binding SpecialTicket}" HorizontalAlignment="Center" VerticalAlignment="Center"  />
                                         </Border>
                                         <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="13">
-                                            <TextBlock Text="{Binding Remark5}" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                                            <TextBlock Text="{Binding Remark1}" HorizontalAlignment="Center" VerticalAlignment="Center"  />
                                         </Border>
-
-                                        <StackPanel Orientation="Horizontal" Grid.Column="14">
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="14">
+                                            <TextBlock Text="{Binding Remark2}" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                                        </Border>
+                                        <StackPanel Orientation="Horizontal" Grid.Column="15">
                                             <Button Content="删除" Margin="5,0" Height="28" FontSize="12" Style="{DynamicResource btn-danger}" Click="btnDelete_Click"/>
                                             <Button Content="修改" Margin="5,0" Height="28" FontSize="12" Click="btnModify_Click"/>
                                         </StackPanel>

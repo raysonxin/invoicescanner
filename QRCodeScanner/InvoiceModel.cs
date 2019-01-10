@@ -57,7 +57,7 @@ namespace QRCodeScanner
 
         public string Number { get; set; }
 
-        public decimal Amount { get; set; }
+        public string Amount { get; set; }
 
         public string MakeDate { get; set; }
 
@@ -69,12 +69,35 @@ namespace QRCodeScanner
 
         public string Remark { get; set; }
 
+        /// <summary>
+        /// 张数/份
+        /// </summary>
+        public string PageCount { get; set; }
+
+        /// <summary>
+        /// 公司
+        /// </summary>
+        public string Company { get; set; }
+
+        /// <summary>
+        /// Flow
+        /// </summary>
+        public string Flow { get; set; }
+
+        /// <summary>
+        /// 专票
+        /// </summary>
+        public string SpecialTicket { get; set; }
+
+        /// <summary>
+        /// 备注1
+        /// </summary>
         public string Remark1 { get; set; }
 
+        /// <summary>
+        /// 备注2
+        /// </summary>
         public string Remark2 { get; set; }
-        public string Remark3 { get; set; }
-        public string Remark4 { get; set; }
-        public string Remark5 { get; set; }
     }
 
     public class PackageModel
