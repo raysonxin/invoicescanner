@@ -5,23 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QRCodeScanner"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" 
+        xmlns:controls="clr-namespace:QRCodeScanner.Controls"
         mc:Ignorable="d" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
         Title="发票扫码工具" Height="700" MinWidth="1260" Width="1260">
     <Window.Resources>
-        <Style x:Key="ItemBorderStyle" TargetType="{x:Type Border}">
-            <Setter Property="Width" Value="60"></Setter>
-            <Setter Property="Height" Value="50"></Setter>
+        <!--<Style x:Key="ItemBorderStyle" TargetType="{x:Type Border}">
+            --><!--<Setter Property="Width" Value="60"></Setter>
+            <Setter Property="Height" Value="50"></Setter>--><!--
             <Setter Property="Background" Value="Transparent"></Setter>
-            <Setter Property="BorderThickness" Value="1"></Setter>
-            <Setter Property="Margin" Value="1"></Setter>
-            <Setter Property="Padding" Value="0,0"></Setter>
+            --><!--<Setter Property="BorderThickness" Value="1"></Setter>--><!--
+            <Setter Property="Margin" Value="2"></Setter>
+            <Setter Property="Padding" Value="3"></Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="true">
-                    <Setter Property="BorderBrush" Value="#563D7C"></Setter>
+                    --><!--<Setter Property="BorderBrush" Value="#563D7C"></Setter>--><!--
                     <Setter Property="Background" Value="#d9edf7"></Setter>
                 </Trigger>
             </Style.Triggers>
-        </Style>
+        </Style>-->
         <Color x:Key="customBlue"  A="255"   R="54" G="95" B="177"  />
         <SolidColorBrush x:Key="customBlueBrush" Color="{StaticResource customBlue}"></SolidColorBrush>
         <SolidColorBrush x:Key="customBlueBrushOpacity" Color="LightGray" Opacity="0.11"></SolidColorBrush>
@@ -151,147 +152,19 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Menu>
-            <MenuItem  x:Name="btnNew" Click="btnNew_Click">
-                <MenuItem.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource ItemBorderStyle}">
-                            <StackPanel>
-                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-plus}"></Path>
-                                <TextBlock TextWrapping="WrapWithOverflow" Text="新增发票"></TextBlock>
-                            </StackPanel>
-                        </Border>
-                    </ControlTemplate>
-                </MenuItem.Template>
-            </MenuItem>
-            <MenuItem  x:Name="btnSave" Click="btnSave_Click">
-                <MenuItem.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource ItemBorderStyle}">
-                            <StackPanel>
-                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-save}"></Path>
-                                <TextBlock TextWrapping="WrapWithOverflow" Text="保存文件"></TextBlock>
-                            </StackPanel>
-                        </Border>
-                    </ControlTemplate>
-                </MenuItem.Template>
-            </MenuItem>
-            <MenuItem  x:Name="btnOpenDraft" Click="btnOpenDraft_Click">
-                <MenuItem.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource ItemBorderStyle}">
-                            <StackPanel>
-                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-open}"></Path>
-                                <TextBlock TextWrapping="WrapWithOverflow" Text="打开草稿"></TextBlock>
-                            </StackPanel>
-                        </Border>
-                    </ControlTemplate>
-                </MenuItem.Template>
-            </MenuItem>
-            <MenuItem Header="导出Excel" x:Name="btnExport" Click="btnExport_Click">
-                <MenuItem.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource ItemBorderStyle}">
-                            <StackPanel>
-                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-share}"></Path>
-                                <TextBlock TextWrapping="WrapWithOverflow" Text="导出Excel"></TextBlock>
-                            </StackPanel>
-                        </Border>
-                    </ControlTemplate>
-                </MenuItem.Template>
-            </MenuItem>
-            <MenuItem Header="设置序号" x:Name="btnSetRowNumber" Click="btnSetRowNumber_Click">
-                <MenuItem.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource ItemBorderStyle}">
-                            <StackPanel>
-                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-cog}"></Path>
-                                <TextBlock TextWrapping="WrapWithOverflow" Text="设置序号"></TextBlock>
-                            </StackPanel>
-                        </Border>
-                    </ControlTemplate>
-                </MenuItem.Template>
-            </MenuItem>
-            <MenuItem Header="插入" x:Name="btnInsertRow" Click="btnInsertRow_Click" Tag="Before" IsEnabled="{Binding IsAllowInsert}">
-                <MenuItem.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource ItemBorderStyle}" x:Name="border">
-                            <StackPanel>
-                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-download-alt}"></Path>
-                                <TextBlock TextWrapping="WrapWithOverflow" Text="行前插入"></TextBlock>
-                            </StackPanel>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="border" Property="Background" Value="Gray"/>
-                            </Trigger>
+        <Menu Background="White">
+            <controls:MenuIconItem IconName="&#xe634;" Text="新增发票" Click="btnNew_Click"/>
+            <controls:MenuIconItem IconName="&#xe626;" Text="保存文件" Click="btnSave_Click" IsActive="{Binding IsNeedSave}"/>
+            <controls:MenuIconItem IconName="&#xe6ed;" Text="打开草稿" Click="btnOpenDraft_Click"/>
 
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </MenuItem.Template>
-            </MenuItem>
-            <MenuItem Header="插入" Click="btnInsertRow_Click" x:Name="InsertAfter" Tag="After" IsEnabled="{Binding IsAllowInsert}">
-                <MenuItem.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource ItemBorderStyle}" x:Name="border">
-                            <StackPanel>
-                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-download-alt}"></Path>
-                                <TextBlock TextWrapping="WrapWithOverflow" Text="行后插入"></TextBlock>
-                            </StackPanel>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="border" Property="Background" Value="Gray"/>
-                            </Trigger>
-                           
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                    
-                </MenuItem.Template>
-            </MenuItem>
-            <MenuItem Header="插入" x:Name="btnCancelInsert" Click="btnCancelInsert_Click">
-                <MenuItem.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource ItemBorderStyle}" x:Name="border">
-                            <StackPanel>
-                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-remove-circle}"></Path>
-                                <TextBlock TextWrapping="WrapWithOverflow" Text="取消插入"></TextBlock>
-                            </StackPanel>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="border" Property="Background" Value="Gray"/>
-                            </Trigger>
+            <controls:MenuIconItem IconName="&#xe673;" Text="导出Excel" Click="btnExport_Click"/>
+            <controls:MenuIconItem IconName="&#xe612;" Text="设置序号" Click="btnSetRowNumber_Click"/>
+            <controls:MenuIconItem IconName="&#xe69d;" Text="行前插入" Click="btnInsertRow_Click" IsActive="{Binding InsertBefore}" Tag="Before" IsEnabled="{Binding IsAllowInsert}"/>
+            <controls:MenuIconItem IconName="&#xe64e;" Text="行后插入" Click="btnInsertRow_Click" IsActive="{Binding InsertAfter}" Tag="After" IsEnabled="{Binding IsAllowInsert}"/>
+            <controls:MenuIconItem IconName="&#xe784;" Text="取消插入" Click="btnCancelInsert_Click" Tag="After"/>
 
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-
-                </MenuItem.Template>
-            </MenuItem>
-            <MenuItem Header="测试" x:Name="btnTest" Click="btnTest_Click">
-                <MenuItem.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource ItemBorderStyle}">
-                            <StackPanel>
-                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-download-alt}"></Path>
-                                <TextBlock TextWrapping="WrapWithOverflow" Text="快递单号"></TextBlock>
-                            </StackPanel>
-                        </Border>
-                    </ControlTemplate>
-                </MenuItem.Template>
-            </MenuItem>
-            <MenuItem Header="测试" x:Name="btnTest1" Click="btnTest1_Click">
-                <MenuItem.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource ItemBorderStyle}">
-                            <StackPanel>
-                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-download-alt}"></Path>
-                                <TextBlock TextWrapping="WrapWithOverflow" Text="发票单号"></TextBlock>
-                            </StackPanel>
-                        </Border>
-                    </ControlTemplate>
-                </MenuItem.Template>
-            </MenuItem>
+            <!--<controls:MenuIconItem IconName="&#xe634;" Text="快递单号" Click="btnTest_Click"/>
+            <controls:MenuIconItem IconName="&#xe634;" Text="发票单号" Click="btnTest1_Click"/>-->
         </Menu>
         <ListBox  Grid.Row="1" VerticalAlignment="Top"  
                   ItemsSource="{Binding PackageList}" 

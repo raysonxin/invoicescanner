@@ -1,0 +1,47 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:QRCodeScanner.Controls">
+
+    <Style x:Key="FontAwesome">
+        <Setter Property="TextElement.FontFamily" Value="/QRCodeScanner;component/Resources/iconfont/#iconfont" />
+        <Setter Property="TextBlock.Width" Value="35"></Setter>
+        <Setter Property="TextBlock.Height" Value="35"></Setter>
+        <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+        <Setter Property="TextBlock.FontSize" Value="30"></Setter>
+        <Setter Property="TextBlock.Foreground" Value="#ff5bc0de"></Setter>
+    </Style>
+    
+    <Style TargetType="{x:Type local:MenuIconItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:MenuIconItem}">
+                    <Border Background="Transparent"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Margin="2"
+                            Padding="3"
+                            x:Name="bd">
+                        <StackPanel>
+                            <TextBlock x:Name="icon" Text="{TemplateBinding IconName}" Style="{DynamicResource FontAwesome}"/>
+                            <TextBlock x:Name="text" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Text="{TemplateBinding Text}"></TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="bd" Value="#ffd9edf7"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" TargetName="bd" Value="#ffeeeeee"/>
+                        </Trigger>
+                        <Trigger Property="IsActive" Value="True">
+                            <Setter Property="Background" TargetName="bd" Value="Green"/>
+                            <Setter Property="Foreground" TargetName="icon" Value="White"/>
+                            <Setter Property="Foreground" TargetName="text" Value="White"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

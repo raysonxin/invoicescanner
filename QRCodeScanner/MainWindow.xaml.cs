@@ -68,6 +68,19 @@ namespace QRCodeScanner
             }
         }
 
+        private bool isNeedSave = false;
+        /// <summary>
+        /// 是否需要保存
+        /// </summary>
+        public bool IsNeedSave
+        {
+            get { return isNeedSave; }
+            set
+            {
+                isNeedSave = value;
+                RaisePropertyChanged("IsNeedSave");
+            }
+        }
 
 
         /// <summary>
@@ -163,6 +176,7 @@ namespace QRCodeScanner
                     var buffer = Encoding.UTF8.GetBytes(json);
                     fs.Write(buffer, 0, buffer.Length);
                 }
+                IsNeedSave = false;
             }
             catch (Exception ex)
             {
@@ -258,6 +272,7 @@ namespace QRCodeScanner
             {
                 invoiceList.Add(one);
             }
+            IsNeedSave = true;
             return true;
         }
 
@@ -596,6 +611,8 @@ namespace QRCodeScanner
             {
                 isAllowInsert = value;
                 RaisePropertyChanged("IsAllowInsert");
+                InsertBefore = false;
+                InsertAfter = false;
             }
         }
 
@@ -617,6 +634,28 @@ namespace QRCodeScanner
             After
         }
 
+        private bool insertBefore = false;
+        public bool InsertBefore
+        {
+            get { return insertBefore; }
+            set
+            {
+                insertBefore = value;
+                RaisePropertyChanged("InsertBefore");
+            }
+        }
+
+        private bool insertAfter = false;
+        public bool InsertAfter
+        {
+            get { return insertAfter; }
+            set
+            {
+                insertAfter = value;
+                RaisePropertyChanged("InsertAfter");
+            }
+        }
+
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -627,6 +666,9 @@ namespace QRCodeScanner
                     pkgNumber = currentInvoice.PkgNumber;
                     insertIndex = invoiceList.IndexOf(currentInvoice) + 1;
                     IsAllowInsert = true;
+
+                    InsertAfter = true;
+                    InsertBefore = false;
                 }
             }
             catch (Exception ex)
@@ -647,10 +689,14 @@ namespace QRCodeScanner
                 {
                     insertPosition = InsertPosition.Before;
                     insertIndex--;
+                    InsertAfter = false;
+                    InsertBefore = true;
                 }
                 else
                 {
                     insertPosition = InsertPosition.After;
+                    InsertAfter = true;
+                    InsertBefore = false;
                 }
             }
             catch (Exception)
@@ -662,6 +708,7 @@ namespace QRCodeScanner
         private void btnCancelInsert_Click(object sender, RoutedEventArgs e)
         {
             IsAllowInsert = false;
+           
         }
         #endregion
     }

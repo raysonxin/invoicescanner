@@ -3,7 +3,8 @@
     <Style x:Key="glyphicon" TargetType="{x:Type Path}">
         <Setter Property="Width" Value="25"></Setter>
         <Setter Property="Height" Value="25"></Setter>
-        <Setter Property="Fill" Value="#ff3c763d"></Setter>
+        <Setter Property="Fill" Value="#ff5bc0de"></Setter>
         <Setter Property="Stretch" Value="Uniform"></Setter>
+        <Setter Property="Margin" Value="2"></Setter>
     </Style>
 </ResourceDictionary>

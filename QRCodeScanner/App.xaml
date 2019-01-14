@@ -8,6 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/QRCodeScanner;component/Styles/Bootstrap.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/QRCodeScanner;component/PathGeometries/Glyphicons.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/QRCodeScanner;component/Themes/Generic.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <!--<SampleData:SampleDataSource x:Key="SampleDataSource" d:IsDataSource="True"/>-->
         </ResourceDictionary>

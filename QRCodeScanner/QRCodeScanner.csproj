@@ -77,6 +77,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\MenuIconItem.cs" />
     <Compile Include="NewView.xaml.cs">
       <DependentUpon>NewView.xaml</DependentUpon>
     </Compile>
@@ -183,6 +184,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -207,6 +212,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\iconfont\iconfont.eot" />
+    <Resource Include="Resources\iconfont\iconfont.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <None Include="Resources\iconfont\iconfont.woff" />
+    <None Include="Resources\iconfont\iconfont.woff2" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -214,6 +225,11 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\glyphicons-halflings-regular.svg" />
+    <Content Include="Resources\iconfont\demo.css" />
+    <Content Include="Resources\iconfont\demo_index.html" />
+    <Content Include="Resources\iconfont\iconfont.css" />
+    <Content Include="Resources\iconfont\iconfont.js" />
+    <Content Include="Resources\iconfont\iconfont.svg" />
     <Resource Include="Content\logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
