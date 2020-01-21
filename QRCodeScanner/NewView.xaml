@@ -5,9 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QRCodeScanner"
         mc:Ignorable="d"
-        Title="新增发票信息" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Height="300" Width="400">
+        Title="新增发票信息" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Height="520" Width="400">
     <Grid Margin="20">
         <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -19,8 +25,8 @@
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="批次号："  Style="{DynamicResource h3 small}" VerticalAlignment="Center"/>
-        <TextBox Width="200" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Model.BatchCode}"/>
+        <Label Content="快递单号："  Style="{DynamicResource h3 small}" VerticalAlignment="Center"/>
+        <TextBox Width="200" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Model.PkgNumber}"/>
 
         <Label Content="发票代码："  Style="{DynamicResource h3 small}" VerticalAlignment="Center" Grid.Row="1"/>
         <TextBox Width="200" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="1" Text="{Binding Model.Code}"/>
@@ -35,7 +41,25 @@
         <DatePicker Width="200" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="4" x:Name="dpDate"  />
         <!--<TextBox Width="200" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="4"  Text="{Binding Model.MakeDate}"/>-->
 
-        <Border Grid.Row="5" Grid.ColumnSpan="2">
+        <Label Content="张数/份："  Style="{DynamicResource h3 small}" VerticalAlignment="Center" Grid.Row="5"/>
+        <TextBox Width="200" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="5" Text="{Binding Model.PageCount}"/>
+
+        <Label Content="公司："  Style="{DynamicResource h3 small}" VerticalAlignment="Center" Grid.Row="6"/>
+        <TextBox Width="200" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="6" Text="{Binding Model.Company}"/>
+
+        <Label Content="Flow："  Style="{DynamicResource h3 small}" VerticalAlignment="Center" Grid.Row="7"/>
+        <TextBox Width="200" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="7" Text="{Binding Model.Flow}"/>
+
+        <Label Content="专票："  Style="{DynamicResource h3 small}" VerticalAlignment="Center" Grid.Row="8"/>
+        <TextBox Width="200" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="8" Text="{Binding Model.SpecialTicket}"/>
+
+        <Label Content="备注1："  Style="{DynamicResource h3 small}" VerticalAlignment="Center" Grid.Row="9"/>
+        <TextBox Width="200" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="9" Text="{Binding Model.Remark1}"/>
+
+        <Label Content="备注2："  Style="{DynamicResource h3 small}" VerticalAlignment="Center" Grid.Row="10"/>
+        <TextBox Width="200" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="10" Text="{Binding Model.Remark2}"/>
+
+        <Border Grid.Row="11" Grid.ColumnSpan="2">
             <Button Style="{DynamicResource btn-primary}" Content="确认" Width="100" x:Name="btnConfirm" Click="btnConfirm_Click"/>
         </Border>
     </Grid>

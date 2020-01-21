@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace InvoiceScanner.Properties
+namespace KeyboardTest.Properties
 {
 
 

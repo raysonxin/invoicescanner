@@ -24,7 +24,7 @@ namespace QRCodeScanner
     /// </summary>
     public partial class NewView : Window, INotifyPropertyChanged
     {
-        public NewView(AddCallbackDelegate action, InvoiceModel one = null)
+        public NewView(AddCallbackDelegate action, InvoiceModel one = null, string pkgNo = "")
         {
             InitializeComponent();
             this.DataContext = this;
@@ -32,20 +32,25 @@ namespace QRCodeScanner
             {
                 callbackAction = action;
             }
+
+            //pkgNumber = pkgNo;
+
             if (one != null)
             {
                 this.Model = one;
-
-                //DateTimeFormatInfo dtFormat = new DateTimeFormatInfo();
-                //dtFormat.ShortDatePattern = "yyyyMMdd";
-
-                dpDate.SelectedDate = DateTime.ParseExact(model.MakeDate, "yyyyMMdd", null);//Convert.ToDateTime(model.MakeDate,dtFormat);
+                dpDate.SelectedDate = DateTime.ParseExact(model.MakeDate, "yyyyMMdd", null);
+            }
+            else
+            {
+                this.Model = new InvoiceModel { PkgNumber = pkgNo };
             }
         }
 
         private AddCallbackDelegate callbackAction { get; set; }
 
-        private InvoiceModel model = new InvoiceModel();
+        private string pkgNumber = string.Empty;
+
+        private InvoiceModel model;
         public InvoiceModel Model
         {
             get { return model; }
@@ -60,11 +65,11 @@ namespace QRCodeScanner
         {
             try
             {
-                if (string.IsNullOrEmpty(model.Code))
-                {
-                    MessageBox.Show("发票代码不能为空！");
-                    return;
-                }
+                //if (string.IsNullOrEmpty(model.Code))
+                //{
+                //    MessageBox.Show("发票代码不能为空！");
+                //    return;
+                //}
 
                 if (string.IsNullOrEmpty(model.Number))
                 {
@@ -78,13 +83,15 @@ namespace QRCodeScanner
                     return;
                 }
 
-                //if (string.IsNullOrEmpty(model.MakeDate))
-                //{
-                //    MessageBox.Show("开票日期不能为空！");
-                //    return;
-                //}
+                if (dpDate.SelectedDate != null)
+                {
+                    model.MakeDate = ((DateTime)dpDate.SelectedDate).ToString("yyyyMMdd");
+                }
+                else
+                {
+                    model.MakeDate = DateTime.Now.ToString("yyyyMMdd");
+                }
 
-                model.MakeDate = ((DateTime)dpDate.SelectedDate).ToString("yyyyMMdd");
                 if (callbackAction == null)
                 {
                     this.Close();

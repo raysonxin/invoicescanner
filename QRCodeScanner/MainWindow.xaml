@@ -5,25 +5,144 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QRCodeScanner"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" 
-        mc:Ignorable="d" ResizeMode="NoResize"
-        Title="发票扫码工具" Height="700" Width="1050">
+        xmlns:controls="clr-namespace:QRCodeScanner.Controls"
+        mc:Ignorable="d" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
+        Title="发票扫码工具" Height="700" MinWidth="1260" Width="1260">
     <Window.Resources>
-        <!--<Style BasedOn="{StaticResource glyphicon}" TargetType="{x:Type Path}">
-            <Setter Property="Margin" Value="5,0"></Setter>
-        </Style>-->
-        <Style x:Key="ItemBorderStyle" TargetType="{x:Type Border}">
-            <Setter Property="Width" Value="60"></Setter>
-            <Setter Property="Height" Value="50"></Setter>
+        <!--<Style x:Key="ItemBorderStyle" TargetType="{x:Type Border}">
+            --><!--<Setter Property="Width" Value="60"></Setter>
+            <Setter Property="Height" Value="50"></Setter>--><!--
             <Setter Property="Background" Value="Transparent"></Setter>
-            <Setter Property="BorderThickness" Value="1"></Setter>
-            <Setter Property="Margin" Value="1"></Setter>
-            <Setter Property="Padding" Value="0,0"></Setter>
+            --><!--<Setter Property="BorderThickness" Value="1"></Setter>--><!--
+            <Setter Property="Margin" Value="2"></Setter>
+            <Setter Property="Padding" Value="3"></Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="true">
-                    <Setter Property="BorderBrush" Value="#563D7C"></Setter>
+                    --><!--<Setter Property="BorderBrush" Value="#563D7C"></Setter>--><!--
                     <Setter Property="Background" Value="#d9edf7"></Setter>
                 </Trigger>
             </Style.Triggers>
+        </Style>-->
+        <Color x:Key="customBlue"  A="255"   R="54" G="95" B="177"  />
+        <SolidColorBrush x:Key="customBlueBrush" Color="{StaticResource customBlue}"></SolidColorBrush>
+        <SolidColorBrush x:Key="customBlueBrushOpacity" Color="LightGray" Opacity="0.11"></SolidColorBrush>
+        <Style x:Key="calcyListbox"  TargetType="ListBox">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBox">
+                        <Grid >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" Height="30"  VerticalAlignment="Top" Background="{StaticResource customBlueBrush}">
+                                <Grid.Resources>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="FontSize" Value="14"/>
+                                        <Setter Property="FontFamily" Value="Segoe Ui Dark"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="SnapsToDevicePixels" Value="True"/>
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+                                    </Style>
+                                </Grid.Resources>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="110"/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="150"/>
+                                </Grid.ColumnDefinitions>
+                                <Border BorderThickness="0,0,1,0" BorderBrush="White">
+                                    <TextBlock Text="运单号"></TextBlock>
+                                </Border>
+
+                                <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="1">
+                                    <TextBlock Text="张数" ></TextBlock>
+                                </Border>
+                                <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="2">
+                                    <TextBlock Text="序列号" ></TextBlock>
+                                </Border>
+                                <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="3">
+                                    <TextBlock Text="发票代码" ></TextBlock>
+                                </Border>
+                                <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="4">
+                                    <TextBlock Text="发票号码" ></TextBlock>
+                                </Border>
+                                <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="5">
+                                    <TextBlock Text="发票金额"></TextBlock>
+                                </Border>
+                                <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="6">
+                                    <TextBlock Text="开票日期"></TextBlock>
+                                </Border>
+                                <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="7">
+                                    <TextBlock Text="扫描日期" ></TextBlock>
+                                </Border>
+                                <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="8">
+                                    <TextBlock Text="扫描时间" ></TextBlock>
+                                </Border>
+                                <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="9">
+                                    <TextBlock Text="备注" ></TextBlock>
+                                </Border>
+                                <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="10">
+                                    <TextBlock Text="张数/份" ></TextBlock>
+                                </Border>
+                                <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="11">
+                                    <TextBlock Text="公司" ></TextBlock>
+                                </Border>
+                                <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="12">
+                                    <TextBlock Text="Flow" ></TextBlock>
+                                </Border>
+                                <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="13">
+                                    <TextBlock Text="专票" ></TextBlock>
+                                </Border>
+                                <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="14">
+                                    <TextBlock Text="备注1" ></TextBlock>
+                                </Border>
+                                <Border BorderThickness="0,0,1,0" BorderBrush="White" Grid.Column="15">
+                                    <TextBlock Text="备注2" ></TextBlock>
+                                </Border>
+                                <Border BorderThickness="0,0,0,0" BorderBrush="White" Grid.Column="16">
+                                    <TextBlock Text="操作" ></TextBlock>
+                                </Border>
+                            </Grid>
+                            <Border Grid.Row="1" SnapsToDevicePixels="True"  Background="Transparent" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
+                                <ScrollViewer x:Name="ScrollViewer"  Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="0">
+                                    <ItemsPresenter />
+                                </ScrollViewer>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="noStyleToListboxItem" TargetType="ListBoxItem">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border BorderThickness="0">
+                            <ContentPresenter></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         
     </Window.Resources>
@@ -31,61 +150,133 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <!--<RowDefinition Height="150"/>-->
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Menu>
-            <MenuItem  x:Name="btnNew" Click="btnNew_Click">
-                <MenuItem.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource ItemBorderStyle}">
-                            <StackPanel>
-                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-plus}"></Path>
-                                <TextBlock TextWrapping="WrapWithOverflow" Text="新增发票"></TextBlock>
-                            </StackPanel>
-                        </Border>
-                    </ControlTemplate>
-                </MenuItem.Template>
-            </MenuItem>
-            <MenuItem Header="导出Excel" x:Name="btnExport" Click="btnExport_Click">
-                <MenuItem.Template>
-                    <ControlTemplate>
-                        <Border Style="{StaticResource ItemBorderStyle}">
-                            <StackPanel>
-                                <Path Style="{StaticResource glyphicon}" Data="{DynamicResource glyphicon-download-alt}"></Path>
-                                <TextBlock TextWrapping="WrapWithOverflow" Text="导出Excel"></TextBlock>
-                            </StackPanel>
-                        </Border>
-                    </ControlTemplate>
-                </MenuItem.Template>
-            </MenuItem>
-        </Menu>
-        <DataGrid x:Name="dataGrid" Grid.Row="1" ItemsSource="{Binding InvoiceList}" AutoGenerateColumns="False" CanUserAddRows="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="NO" Binding="{Binding RowNumber}" Width="50" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="批次号" Binding="{Binding BatchCode}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="发票代码" Binding="{Binding Code}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="发票号码" Binding="{Binding Number}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="发票金额" Binding="{Binding Amount}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="开票日期" Binding="{Binding MakeDate}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
-                <!--<DataGridTextColumn Header="发票类型" Binding="{Binding TypeName}" Width="150" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>-->
-                <DataGridTextColumn Header="扫描日期" Binding="{Binding ScanDate}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="扫描时间" Binding="{Binding ScanTime}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="备注" Binding="{Binding Remark}" Width="100" ElementStyle="{StaticResource DataGridTextCenter}"/>
-                <DataGridTemplateColumn Header="操作">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Content="删除" Margin="3" Height="28" FontSize="12" Style="{DynamicResource btn-danger}" Click="btnDelete_Click"/>
-                                <Button Content="修改" Margin="3" Height="28" FontSize="12" Click="btnModify_Click"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Menu Background="White">
+            <controls:MenuIconItem IconName="&#xe634;" Text="新增发票" Click="btnNew_Click"/>
+            <controls:MenuIconItem IconName="&#xe626;" Text="保存文件" Click="btnSave_Click" IsActive="{Binding IsNeedSave}"/>
+            <controls:MenuIconItem IconName="&#xe6ed;" Text="打开草稿" Click="btnOpenDraft_Click"/>
 
-        <!--<GroupBox Header="新增/编辑" Grid.Row="2">
-            
-        </GroupBox>-->
+            <controls:MenuIconItem IconName="&#xe673;" Text="导出Excel" Click="btnExport_Click"/>
+            <controls:MenuIconItem IconName="&#xe612;" Text="设置序号" Click="btnSetRowNumber_Click"/>
+            <controls:MenuIconItem IconName="&#xe69d;" Text="行前插入" Click="btnInsertRow_Click" IsActive="{Binding InsertBefore}" Tag="Before" IsEnabled="{Binding IsAllowInsert}"/>
+            <controls:MenuIconItem IconName="&#xe64e;" Text="行后插入" Click="btnInsertRow_Click" IsActive="{Binding InsertAfter}" Tag="After" IsEnabled="{Binding IsAllowInsert}"/>
+            <controls:MenuIconItem IconName="&#xe784;" Text="取消插入" Click="btnCancelInsert_Click" Tag="After"/>
+
+            <!--<controls:MenuIconItem IconName="&#xe634;" Text="快递单号" Click="btnTest_Click"/>
+            <controls:MenuIconItem IconName="&#xe634;" Text="发票单号" Click="btnTest1_Click"/>-->
+        </Menu>
+        <ListBox  Grid.Row="1" VerticalAlignment="Top"  
+                  ItemsSource="{Binding PackageList}" 
+                  Background="{StaticResource customBlueBrushOpacity}"  
+                  x:Name="ManufacturerListBox" 
+                  ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                  Style="{StaticResource calcyListbox}" 
+                  ItemContainerStyle="{StaticResource noStyleToListboxItem}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="108"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border BorderThickness="0,0,0,1" BorderBrush="Black" >
+                            <TextBlock Text="{Binding PkgNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30"/>
+                        </Border>
+                        <ListBox Grid.Column="1" AlternationCount="2" BorderThickness="0" 
+                                 Background="{StaticResource customBlueBrushOpacity}" 
+                                 HorizontalContentAlignment="Stretch" 
+                                 ItemsSource="{Binding InvoiceList}" SelectionMode="Single" SelectionChanged="ListBox_SelectionChanged">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Height="30">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="49"/>
+                                            <ColumnDefinition Width="49"/>
+                                            <ColumnDefinition Width="119"/>
+                                            <ColumnDefinition Width="119"/>
+                                            <ColumnDefinition Width="80"/>
+                                            <ColumnDefinition Width="80"/>
+                                            <ColumnDefinition Width="80"/>
+                                            <ColumnDefinition Width="79"/>
+                                            <ColumnDefinition Width="59"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="140"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="0">
+                                            <TextBlock Text="{Binding PkgIndex}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="1">
+                                            <TextBlock Text="{Binding RowNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="2">
+                                            <TextBlock Text="{Binding Code}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="3">
+                                            <TextBlock Text="{Binding Number}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="4">
+                                            <TextBlock Text="{Binding Amount}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="5">
+                                            <TextBlock Text="{Binding MakeDate}" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                                        </Border>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="6">
+                                            <TextBlock Text="{Binding ScanDate}" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                                        </Border>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="7">
+                                            <TextBlock Text="{Binding ScanTime}" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                                        </Border>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="8">
+                                            <TextBlock Text="{Binding Remark}" HorizontalAlignment="Center" VerticalAlignment="Center"   />
+                                        </Border>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="9">
+                                            <TextBlock Text="{Binding PageCount}" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                                        </Border>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="10">
+                                            <TextBlock Text="{Binding Company}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="11">
+                                            <TextBlock Text="{Binding Flow}" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                                        </Border>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="12">
+                                            <TextBlock Text="{Binding SpecialTicket}" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                                        </Border>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="13">
+                                            <TextBlock Text="{Binding Remark1}" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                                        </Border>
+                                        <Border BorderThickness="0,0,1,0" BorderBrush="Black" Grid.Column="14">
+                                            <TextBlock Text="{Binding Remark2}" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                                        </Border>
+                                        <StackPanel Orientation="Horizontal" Grid.Column="15">
+                                            <Button Content="删除" Margin="5,0" Height="28" FontSize="12" Style="{DynamicResource btn-danger}" Click="btnDelete_Click"/>
+                                            <Button Content="修改" Margin="5,0" Height="28" FontSize="12" Click="btnModify_Click"/>
+                                        </StackPanel>
+                                        <!--<TextBlock Text="" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="9"/>-->
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Background" Value="#fff"/>
+                                   
+                                    <Style.Triggers>
+                                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                            <Setter Property="Background" Value="#f9f9f9"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
